@@ -1,0 +1,13 @@
+{
+  "name": "lumistay",
+  "version": "1.0.0",
+  "description": "LumiStay Hotel & Resort - 5-Star Luxury Booking System",
+  "scripts": {
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm --prefix backend install && npm --prefix frontend install"
+  },
+  "keywords": ["hotel", "resort", "booking", "react", "nodejs"],
+  "author": "LumiStay",
+  "license": "ISC"
+}

@@ -1,0 +1,108 @@
+.cta-banner-section {
+  position: relative;
+  padding: 60px 0;
+  background: url('/images/hero.jpg') center/cover no-repeat;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 167, 32, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cta-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 13, 28, 0.95) 0%,
+    rgba(7, 24, 51, 0.85) 50%,
+    rgba(3, 13, 28, 0.95) 100%
+  );
+}
+
+.cta-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cta-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-brand-icon {
+  font-size: 26px;
+  color: var(--gold-300);
+}
+
+.cta-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cta-brand-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cta-brand-sub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-400);
+  text-transform: uppercase;
+}
+
+.cta-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cta-heading {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.cta-subheading {
+  font-size: 13.5px;
+  color: #cbd5e1;
+  margin-bottom: 18px;
+}
+
+.cta-btn {
+  padding: 10px 28px;
+  font-size: 13px;
+  border-radius: 30px;
+}
+
+.cta-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.cta-socials a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.cta-socials a:hover {
+  color: var(--gold-300);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .cta-container {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+}

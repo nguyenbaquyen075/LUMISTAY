@@ -1,0 +1,194 @@
+.reviews-section {
+  padding: 60px 0;
+  background: #030d1c;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reviews-split-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.reviews-left-col {
+  padding-right: 10px;
+}
+
+.reviews-left-col .section-title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.reviews-left-col .section-subtitle {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.reviews-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-300);
+  font-size: 12.5px;
+  font-weight: 500;
+  border: 1px solid rgba(212, 167, 32, 0.4);
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: all 0.2s;
+}
+
+.reviews-cta-btn:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+
+/* Right Grid: 3 cards + 1 calligraphy box */
+.reviews-right-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.1fr;
+  gap: 12px;
+}
+
+.review-compact-card {
+  background: rgba(11, 30, 56, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 190px;
+}
+
+.review-author-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--gold-400);
+}
+
+.author-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.author-role {
+  font-size: 10.5px;
+  color: #94a3b8;
+}
+
+.review-quote {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.review-stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star-icon {
+  color: var(--gold-400);
+  fill: var(--gold-400);
+  font-size: 11px;
+}
+
+/* Calligraphy Card */
+.reviews-calligraphy-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: url('/images/hero.jpg') center/cover no-repeat;
+  border: 1px solid rgba(212, 167, 32, 0.25);
+  min-height: 190px;
+}
+
+.calligraphy-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(7, 24, 51, 0.82) 0%, rgba(3, 13, 28, 0.92) 100%);
+}
+
+.calligraphy-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calligraphy-heading {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.35;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.calligraphy-heading em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--gold-300);
+  font-size: 19px;
+}
+
+.calligraphy-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.mini-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mini-arrow-btn:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+
+@media (max-width: 1200px) {
+  .reviews-split-layout {
+    grid-template-columns: 1fr;
+  }
+  .reviews-right-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-right-grid {
+    grid-template-columns: 1fr;
+  }
+}

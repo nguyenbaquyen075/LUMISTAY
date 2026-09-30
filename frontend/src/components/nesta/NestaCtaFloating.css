@@ -1,0 +1,120 @@
+.nesta-cta-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cta-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-global {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #caa66d;
+  border: none;
+  box-shadow: 0 8px 24px rgba(202, 166, 109, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-global:hover {
+  background: #181819;
+  transform: scale(1.08);
+}
+
+.cta-global img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.cta-list {
+  position: absolute;
+  bottom: 68px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(15px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-list.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.cta-item {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.cta-item:hover {
+  transform: scale(1.12);
+}
+
+.cta-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.cta-item img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.cta-booking {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #181819;
+  color: #ffffff;
+  border: 1px solid #caa66d;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-booking:hover {
+  background: #caa66d;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(202, 166, 109, 0.4);
+}
+
+.cta-booking img {
+  width: 16px;
+  height: 16px;
+}

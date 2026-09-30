@@ -1,0 +1,234 @@
+.featured-rooms-section {
+  padding: 60px 0;
+  background: #040e1e;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-inner-container {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.rooms-split-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+/* Left Column */
+.rooms-left-col {
+  padding-right: 10px;
+}
+
+.rooms-left-col .section-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.rooms-left-col .section-subtitle {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.rooms-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rooms-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-300);
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid rgba(212, 167, 32, 0.4);
+  padding: 8px 18px;
+  border-radius: 30px;
+}
+
+.rooms-view-all-link:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+
+/* Navigation circular arrows */
+.carousel-nav-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.carousel-nav-btn:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+  border-color: var(--gold-400);
+}
+
+/* Right Wrapper */
+.rooms-right-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.rooms-carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px;
+  flex: 1;
+}
+
+.rooms-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Compact Room Card */
+.room-card-compact {
+  flex: 0 0 260px;
+  background: #091a32;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-card-compact:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 167, 32, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.room-card-thumb {
+  height: 155px;
+  overflow: hidden;
+}
+
+.room-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.room-card-compact:hover .room-card-thumb img {
+  transform: scale(1.08);
+}
+
+.room-card-info {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.room-card-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.room-card-title a:hover {
+  color: var(--gold-300);
+}
+
+.room-card-specs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  white-space: nowrap;
+}
+
+.room-card-specs span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.pipe {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.room-card-bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.price-display {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.price-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.price-unit {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.btn-book-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-book-pill:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+  border-color: var(--gold-400);
+}
+
+@media (max-width: 1024px) {
+  .rooms-split-layout {
+    grid-template-columns: 1fr;
+  }
+}

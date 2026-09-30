@@ -1,0 +1,139 @@
+.auth-page {
+  min-height: 100vh;
+  background: url('/images/hero.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 60px;
+}
+
+.auth-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 13, 28, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.auth-card-box {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  background: #091c36;
+  border: 1px solid rgba(212, 167, 32, 0.35);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.gold-sparkle {
+  font-size: 24px;
+  color: var(--gold-300);
+}
+
+.auth-brand-mark h2 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.auth-subtitle {
+  font-size: 13.5px;
+  color: #94a3b8;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-wrap .input-icon {
+  position: absolute;
+  left: 16px;
+  color: var(--gold-400);
+  font-size: 16px;
+}
+
+.auth-input-wrap .form-input {
+  padding-left: 46px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.auth-input-wrap .form-input:focus {
+  border-color: var(--gold-400);
+}
+
+.quick-demo-login {
+  margin-top: 20px;
+  padding: 12px;
+  background: rgba(212, 167, 32, 0.1);
+  border: 1px dashed var(--gold-400);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.btn-demo-quick {
+  background: var(--gold-400);
+  color: var(--navy-900);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-demo-quick:hover {
+  background: var(--gold-300);
+}
+
+.auth-footer-link {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.auth-footer-link a {
+  color: var(--gold-300);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.auth-footer-link a:hover {
+  color: var(--gold-200);
+}

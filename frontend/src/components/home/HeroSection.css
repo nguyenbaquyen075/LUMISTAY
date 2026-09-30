@@ -1,0 +1,675 @@
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 130px;
+  padding-bottom: 50px;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.hero-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  transition: transform 10s ease;
+}
+
+.hero-section:hover .hero-bg-image {
+  transform: scale(1.06);
+}
+
+.hero-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 13, 28, 0.75) 0%,
+    rgba(3, 13, 28, 0.4) 40%,
+    rgba(3, 13, 28, 0.7) 80%,
+    rgba(3, 13, 28, 0.95) 100%
+  );
+}
+
+/* Floating Lumi AI Badge in top right */
+.hero-ai-badge {
+  position: absolute;
+  top: 100px;
+  right: 48px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(11, 30, 56, 0.85);
+  border: 1px solid rgba(212, 167, 32, 0.4);
+  backdrop-filter: blur(12px);
+  padding: 10px 18px;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.hero-ai-badge:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold-300);
+  box-shadow: 0 12px 35px rgba(212, 167, 32, 0.3);
+}
+
+.ai-avatar {
+  position: relative;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-pulse {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border-radius: 50%;
+  top: -2px;
+  right: -2px;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.ai-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-300);
+}
+
+.ai-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ai-arrow {
+  color: var(--gold-300);
+  font-size: 14px;
+}
+
+/* Content Container */
+.hero-content-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.hero-text-content {
+  max-width: 820px;
+  margin-top: 20px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: var(--gold-300);
+  margin-bottom: 20px;
+}
+
+.eyebrow-line {
+  width: 32px;
+  height: 2px;
+  background: var(--gold-400);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 5.2vw, 64px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 22px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title em {
+  font-style: italic;
+  font-family: var(--font-serif);
+  color: #fff4db;
+  text-shadow: 0 0 35px rgba(212, 167, 32, 0.4);
+}
+
+.hero-desc {
+  font-size: clamp(15px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 640px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.hero-features-and-video-row {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-bottom: 24px;
+}
+
+/* Three highlights */
+.hero-highlights {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(3, 13, 28, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 20px;
+  border-radius: 50px;
+  width: fit-content;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.highlight-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(212, 167, 32, 0.15);
+  border: 1px solid rgba(212, 167, 32, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-300);
+  font-size: 16px;
+}
+
+.highlight-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-info strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.highlight-info span {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.highlight-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Video trigger */
+.hero-video-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hero-video-trigger:hover {
+  transform: translateX(4px);
+}
+
+.play-button-glow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid var(--gold-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-300);
+  font-size: 18px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.play-button-glow::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 167, 32, 0.5);
+  animation: spin 12s linear infinite;
+}
+
+.hero-video-trigger:hover .play-button-glow {
+  background: var(--gold-400);
+  color: var(--navy-900);
+  box-shadow: 0 0 24px rgba(212, 167, 32, 0.6);
+}
+
+.video-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.video-sub {
+  font-size: 12px;
+  color: var(--gold-300);
+}
+
+/* NESTA HOTEL STYLE BOOKING BAR (#bookingHotel) */
+.nesta-booking-form-bar {
+  margin-top: 40px;
+  background: rgba(7, 24, 51, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(212, 167, 32, 0.4);
+  border-radius: 18px;
+  padding: 8px 12px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 50;
+}
+
+.nesta-booking-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nesta-form-item {
+  position: relative;
+  flex: 1;
+}
+
+.nesta-field-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nesta-field-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nesta-field-icon {
+  font-size: 20px;
+  color: var(--gold-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nesta-field-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.nesta-field-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold-400);
+  text-transform: uppercase;
+}
+
+.nesta-field-value {
+  font-size: 13.5px;
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nesta-arrow-down {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 4px;
+}
+
+.nesta-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+/* Date inputs in Nesta form */
+.nesta-date-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nesta-date-inputs input {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 110px;
+}
+
+.nesta-date-inputs input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(1) saturate(5) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+.nesta-date-sep {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+}
+
+/* Promo code input */
+.nesta-promo-input {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.nesta-promo-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+/* Dropdown Menu (Destinations) */
+.nesta-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: #091c36;
+  border: 1px solid rgba(212, 167, 32, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  min-width: 270px;
+  overflow: hidden;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+
+.nesta-dropdown-item {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.nesta-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.nesta-dropdown-item:hover,
+.nesta-dropdown-item.is-active {
+  background: rgba(212, 167, 32, 0.15);
+  color: var(--gold-300);
+}
+
+/* People Counter Popup (Nesta style: select-box) */
+.nesta-select-box-popup {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: #091c36;
+  border: 1px solid rgba(212, 167, 32, 0.35);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  width: 260px;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+
+.nesta-counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nesta-counter-row strong {
+  display: block;
+  font-size: 13.5px;
+  color: #ffffff;
+}
+
+.nesta-counter-row small {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.nesta-counter-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nesta-counter-ctrl button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.nesta-counter-ctrl button:not(:disabled):hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+
+.nesta-counter-ctrl button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nesta-counter-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 14px;
+  text-align: center;
+}
+
+.nesta-counter-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 12px 0;
+}
+
+/* Submit Button */
+.nesta-submit-item {
+  flex: 0 0 auto;
+}
+
+.nesta-submit-btn {
+  background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-500) 100%);
+  color: var(--navy-900);
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(212, 167, 32, 0.4);
+  transition: all 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nesta-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(212, 167, 32, 0.6);
+}
+
+@media (max-width: 1100px) {
+  .nesta-booking-form {
+    flex-wrap: wrap;
+  }
+  .nesta-divider {
+    display: none;
+  }
+  .nesta-form-item {
+    flex: 1 1 45%;
+  }
+  .nesta-submit-item {
+    flex: 1 1 100%;
+  }
+  .nesta-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .nesta-form-item {
+    flex: 1 1 100%;
+  }
+}
+
+/* Video Modal */
+.video-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(212, 167, 32, 0.3);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.video-modal-close:hover {
+  background: #ef4444;
+}
+
+.video-frame-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-frame-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .hero-booking-bar {
+    margin-top: 36px;
+  }
+  .booking-bar-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .booking-field-divider {
+    width: 100%;
+    height: 1px;
+  }
+  .hero-highlights {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 20px;
+  }
+  .highlight-divider {
+    width: 100%;
+    height: 1px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-ai-badge {
+    position: static;
+    margin-bottom: 20px;
+    align-self: flex-start;
+  }
+}

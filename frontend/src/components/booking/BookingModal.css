@@ -1,0 +1,248 @@
+.booking-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 13, 28, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.booking-modal-box {
+  position: relative;
+  background: #091c36;
+  border: 1px solid rgba(212, 167, 32, 0.4);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 680px;
+  padding: 36px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: #ef4444;
+}
+
+.modal-header {
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: #ffffff;
+  margin-top: 4px;
+}
+
+.booking-grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.booking-modal-box .form-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+.booking-modal-box .form-input:focus {
+  border-color: var(--gold-400);
+}
+
+.booking-modal-box select.form-input option {
+  background: #091c36;
+  color: white;
+}
+
+.payment-options-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13.5px;
+}
+
+.payment-pill.active {
+  border-color: var(--gold-400);
+  background: rgba(212, 167, 32, 0.1);
+}
+
+.payment-pill input[type="radio"] {
+  accent-color: var(--gold-400);
+}
+
+/* Pricing Card */
+.pricing-summary-card {
+  background: rgba(212, 167, 32, 0.08);
+  border: 1px dashed rgba(212, 167, 32, 0.35);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 8px;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.price-divider {
+  height: 1px;
+  background: rgba(212, 167, 32, 0.2);
+  margin: 10px 0;
+}
+
+.price-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.total-gold-price {
+  font-size: 22px;
+  color: var(--gold-300);
+  font-weight: 700;
+}
+
+.w-full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Success View */
+.booking-success-view {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.success-icon-wrap {
+  font-size: 54px;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.success-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.success-sub {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.booking-code-card {
+  background: rgba(212, 167, 32, 0.1);
+  border: 1px dashed var(--gold-400);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.code-text {
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--gold-300);
+}
+
+.booking-code-card small {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.booking-summary-mini {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.highlight-price {
+  color: var(--gold-300);
+  font-size: 16px;
+}
+
+.error-alert {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+  .booking-grid-form {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: span 1;
+  }
+  .booking-modal-box {
+    padding: 24px 18px;
+  }
+}

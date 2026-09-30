@@ -1,0 +1,161 @@
+.intro-section {
+  padding: 60px 0;
+  background-color: #f7f4eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-section .container {
+  max-width: 1560px;
+  padding: 0 32px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.intro-text-side {
+  padding-right: 20px;
+}
+
+.intro-text-side .section-title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 1.25;
+  color: #1a2a40;
+  margin-bottom: 14px;
+}
+
+.intro-paragraph {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #556270;
+  margin-bottom: 24px;
+}
+
+.intro-btn {
+  padding: 8px 20px;
+  font-size: 12.5px;
+  border-radius: 30px;
+}
+
+/* 3-card layout */
+.intro-visual-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.visual-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  height: 250px;
+  transition: transform 0.3s ease;
+}
+
+.visual-card:hover {
+  transform: translateY(-4px);
+}
+
+.visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.visual-card:hover .visual-img {
+  transform: scale(1.05);
+}
+
+.visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%);
+}
+
+/* Stats Card in middle */
+.visual-card-stats {
+  background: #071833;
+  color: #ffffff;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(212, 167, 32, 0.3);
+}
+
+.stats-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold-300);
+}
+
+.stat-label {
+  font-size: 11.5px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.stat-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 12px 0;
+}
+
+.stats-brand {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-brand-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: #ffffff;
+  font-style: italic;
+}
+
+.stats-brand-sub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-400);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-visual-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .visual-card {
+    height: 280px;
+  }
+}
