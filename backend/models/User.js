@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   avatar: { type: String, default: '' },
   role: {
     type: String,
-    enum: ['guest', 'admin'],
+    enum: ['guest', 'receptionist', 'housekeeping', 'cashier', 'accountant', 'sales', 'manager', 'admin'], // admin = Super Admin
     default: 'guest'
   },
   isActive: { type: Boolean, default: true },

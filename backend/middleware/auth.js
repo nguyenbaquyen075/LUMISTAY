@@ -12,7 +12,7 @@ exports.protect = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.id);
-    if (!req.user) {
+    if (!req.user || !req.user.isActive) {
       return res.status(401).json({ success: false, message: 'Token không hợp lệ hoặc người dùng không tồn tại.' });
     }
     next();

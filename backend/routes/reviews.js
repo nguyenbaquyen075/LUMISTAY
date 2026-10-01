@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Review = require('../models/Review');
 const Room = require('../models/Room');
-const { protect, authorize } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
+const { need } = require('../middleware/permissions');
 
 // @GET /api/reviews
 router.get('/', async (req, res) => {
@@ -19,7 +20,7 @@ router.get('/', async (req, res) => {
       .skip((parseInt(page) - 1) * parseInt(limit));
     res.json({ success: true, count: reviews.length, total, reviews });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error(err); res.status(500).json({ success: false, message: 'Lỗi máy chủ.' });
   }
 });
 
@@ -47,9 +48,9 @@ router.post('/', async (req, res) => {
 });
 
 // @PUT /api/reviews/:id - Admin approve/feature
-router.put('/:id', protect, authorize('admin'), async (req, res) => {
+router.put('/:id', protect, need('rooms.edit'), async (req, res) => {
   try {
-    const review = await Review.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const review = await Review.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' });
     res.json({ success: true, review });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
@@ -57,12 +58,12 @@ router.put('/:id', protect, authorize('admin'), async (req, res) => {
 });
 
 // @DELETE /api/reviews/:id
-router.delete('/:id', protect, authorize('admin'), async (req, res) => {
+router.delete('/:id', protect, need('rooms.edit'), async (req, res) => {
   try {
     await Review.findByIdAndDelete(req.params.id);
     res.json({ success: true, message: 'Xóa đánh giá thành công!' });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error(err); res.status(500).json({ success: false, message: 'Lỗi máy chủ.' });
   }
 });
 

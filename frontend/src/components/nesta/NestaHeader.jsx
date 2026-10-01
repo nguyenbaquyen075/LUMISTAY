@@ -9,6 +9,9 @@ const NestaHeader = ({ onOpenBookingModal }) => {
   const [langOpen, setLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState('VIE');
 
+  // Home page: header stays off-screen until the user starts scrolling
+  const hidden = useLocation().pathname === '/' && !scrolled;
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -25,7 +28,7 @@ const NestaHeader = ({ onOpenBookingModal }) => {
   ];
 
   return (
-    <header id="header" className={`header-nesta ${scrolled ? 'header-scrolled' : ''}`}>
+    <header id="header" className={`header-nesta ${scrolled ? 'header-scrolled' : ''} ${hidden ? 'header-hidden' : ''}`}>
       <div className="header-container-inner">
         {/* Left: Language Dropdown */}
         <div className="header-lang-wrapper">

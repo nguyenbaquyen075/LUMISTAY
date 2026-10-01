@@ -1,5 +1,12 @@
+.hero-track { height: 300vh; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-track { height: auto; }
+}
+
 .hero {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
   height: 100dvh;
@@ -14,82 +21,44 @@
   height: 100%;
 }
 
-.hero-slider {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.hero-slide-item {
+/* Scroll-driven door-opening hero: 300vh track, sticky stage */
+.hero-door {
   position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  will-change: transform;
 }
 
-.hero-slide-item.active {
-  opacity: 1;
-}
+.hero-door-left { left: 0; box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5); }
+.hero-door-right { right: 0; box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5); }
 
-.hero-slider-img {
-  width: 100%;
-  height: 100%;
-}
-
-.hero-slider-img img {
-  width: 100%;
+.hero-door img,
+.hero-interior {
+  position: absolute;
+  top: 0;
   height: 100%;
   object-fit: cover;
 }
 
-.hero-slider-dots {
-  position: absolute;
-  bottom: 120px;
-  right: 50px;
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-
-.dot-btn {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.dot-btn.active {
-  background: #caa66d;
-  width: 24px;
-  border-radius: 10px;
-}
+.hero-interior { left: 0; width: 100%; }
+.hero-door img { width: 200%; max-width: none; }
+.hero-door-left img { left: 0; }
+.hero-door-right img { right: 0; }
 
 /* Luxury Hero Caption with bottom-up entrance */
 .hero-luxury-caption {
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 32%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   text-align: center;
   z-index: 15;
   width: 90%;
   max-width: 900px;
   pointer-events: none;
-  animation: heroCaptionEntrance 1.05s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-@keyframes heroCaptionEntrance {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, calc(-50% + 40px));
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
 }
 
 .hero-luxury-badge {

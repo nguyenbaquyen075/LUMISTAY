@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FiChevronDown, FiPlus, FiMinus } from 'react-icons/fi';
 import './NestaHero.css';
@@ -27,21 +28,20 @@ const NestaHero = ({ onOpenBookingModal }) => {
   const [showPeopleDropdown, setShowPeopleDropdown] = useState(false);
 
   const [promoCode, setPromoCode] = useState('');
-  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const heroSlides = [
-    'https://nestahotel.com.vn/wp-content/uploads/2026/02/Overview_1-1-1.webp',
-    'https://nestahotel.com.vn/wp-content/uploads/2026/02/LAM9643-1.jpg',
-    'https://nestahotel.com.vn/wp-content/uploads/2026/02/Xe_2-1-1.webp'
-  ];
+  // Scroll-driven entrance: the exterior shot splits into two doors that
+  // swing open (while zooming in) to reveal the interior.
+  const exteriorImg = 'https://nestahotel.com.vn/wp-content/uploads/2026/02/Overview_1-1-1.webp';
+  const interiorImg = 'https://nestahotel.com.vn/wp-content/uploads/2026/02/LAM9643-1.jpg';
 
-  // Auto slide hero
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [heroSlides.length]);
+  const trackRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: trackRef, offset: ['start start', 'end end'] });
+  const leftX = useTransform(scrollYProgress, [0.1, 0.7], ['0%', '-100%']);
+  const rightX = useTransform(scrollYProgress, [0.1, 0.7], ['0%', '100%']);
+  const doorScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.35]);
+  const interiorScale = useTransform(scrollYProgress, [0.1, 1], [1.3, 1]);
+  const captionOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const captionY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
 
   const destRef = useRef(null);
   const peopleRef = useRef(null);
@@ -67,35 +67,21 @@ const NestaHero = ({ onOpenBookingModal }) => {
   };
 
   return (
+    <div className="hero-track" ref={trackRef}>
     <section className="hero">
       <div className="container-fluid p-0">
-        <div className="hero-option-slider not-has-content">
-          <div className="hero-slider h-100">
-            {heroSlides.map((img, i) => (
-              <div 
-                key={i} 
-                className={`hero-slide-item ${currentSlide === i ? 'active' : ''}`}
-              >
-                <div className="hero-slider-img">
-                  <img src={img} alt="Nesta Hanoi Hotel" className="img-fluid" />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="hero-slider-dots">
-            {heroSlides.map((_, i) => (
-              <button 
-                key={i} 
-                className={`dot-btn ${currentSlide === i ? 'active' : ''}`}
-                onClick={() => setCurrentSlide(i)}
-              />
-            ))}
-          </div>
+        <div className="hero-option-slider">
+          <motion.img src={interiorImg} alt="LumiStay lobby" className="hero-interior" style={{ scale: interiorScale }} />
+          <motion.div className="hero-door hero-door-left" style={{ x: leftX }}>
+            <motion.img src={exteriorImg} alt="LumiStay Hanoi" style={{ scale: doorScale, transformOrigin: 'right center' }} />
+          </motion.div>
+          <motion.div className="hero-door hero-door-right" style={{ x: rightX }}>
+            <motion.img src={exteriorImg} alt="" style={{ scale: doorScale, transformOrigin: 'left center' }} />
+          </motion.div>
         </div>
 
         {/* Luxury Hero Caption */}
-        <div className="hero-luxury-caption">
+        <motion.div className="hero-luxury-caption" style={{ opacity: captionOpacity, y: captionY }}>
           <div className="hero-luxury-badge">
             <span>✦</span> 5-STAR LUXURY HOTEL &amp; RESIDENCES <span>✦</span>
           </div>
@@ -103,7 +89,7 @@ const NestaHero = ({ onOpenBookingModal }) => {
           <p className="hero-luxury-subtitle">
             Khởi nguồn không gian lưu trú thanh lịch &amp; đẳng cấp vượt thời gian
           </p>
-        </div>
+        </motion.div>
 
         {/* NESTA FORM: #bookingHotel */}
         <div className="booking-hotel-container">
@@ -283,6 +269,7 @@ const NestaHero = ({ onOpenBookingModal }) => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

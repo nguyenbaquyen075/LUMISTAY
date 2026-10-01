@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import NestaHeader from './components/nesta/NestaHeader';
 import NestaFooter from './components/nesta/NestaFooter';
@@ -18,6 +18,9 @@ import RegisterPage from './pages/RegisterPage';
 import AdminDashboard from './pages/AdminDashboard';
 import MyBookingsPage from './pages/MyBookingsPage';
 import useScrollReveal from './hooks/useScrollReveal';
+
+// The admin area has its own top bar, so the public site chrome is hidden there
+const PublicOnly = ({ children }) => (useLocation().pathname.startsWith('/admin') ? null : children);
 
 function App() {
   // Global on-scroll bottom-to-top reveal animations
@@ -43,9 +46,11 @@ function App() {
         <ScrollToTop />
         <div className="app-layout">
           {/* Exact Nesta Header with Lang selector, brand logo, and navigation */}
-          <NestaHeader 
+          <PublicOnly>
+            <NestaHeader 
             onOpenBookingModal={handleOpenBookingModal} 
           />
+          </PublicOnly>
 
           <main className="main-content">
             <Routes>
@@ -95,26 +100,34 @@ function App() {
           </main>
 
           {/* Exact Nesta Footer */}
-          <NestaFooter />
+          <PublicOnly>
+            <NestaFooter />
+          </PublicOnly>
 
           {/* Floating CTA & Booking button with AI Concierge */}
-          <NestaCtaFloating 
+          <PublicOnly>
+            <NestaCtaFloating 
             onOpenBookingModal={handleOpenBookingModal} 
             onOpenChatbot={() => setIsChatbotOpen(true)}
           />
+          </PublicOnly>
 
           {/* Floating AI Chatbot Widget */}
-          <Chatbot 
+          <PublicOnly>
+            <Chatbot 
             isOpen={isChatbotOpen} 
             onClose={() => setIsChatbotOpen(false)} 
           />
+          </PublicOnly>
 
           {/* Global Booking Modal hooked to real backend API */}
-          <BookingModal 
+          <PublicOnly>
+            <BookingModal 
             isOpen={isBookingModalOpen} 
             onClose={() => setIsBookingModalOpen(false)} 
             selectedRoom={selectedRoomForBooking}
           />
+          </PublicOnly>
         </div>
       </Router>
     </AuthProvider>

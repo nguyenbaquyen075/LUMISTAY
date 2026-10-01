@@ -24,6 +24,7 @@ const BookingModal = ({ isOpen, onClose, selectedRoom }) => {
   const [loading, setLoading] = useState(false);
   const [successBooking, setSuccessBooking] = useState(null);
   const [error, setError] = useState('');
+  const [quote, setQuote] = useState(null); // server price for the chosen room type and stay
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -62,11 +63,31 @@ const BookingModal = ({ isOpen, onClose, selectedRoom }) => {
     }
   }, [selectedRoom, user]);
 
+  const currentRoom = rooms.find(r => r._id === roomId) || selectedRoom;
+  const roomType = currentRoom?.type;
+
+  // Ask the server for the real price (season, weekend, extra guests) and remaining inventory
+  useEffect(() => {
+    if (!isOpen || !roomType || !checkIn || !checkOut || checkOut <= checkIn) { setQuote(null); return; }
+    let cancelled = false;
+    api.get('/bookings/availability', { params: { checkIn, checkOut, adults, children } })
+      .then((res) => {
+        if (cancelled) return;
+        const t = res.data.types.find((x) => x.type.name === roomType);
+        const plan = t?.plans.find((p) => p.code === 'BAR') || t?.plans[0];
+        setQuote(t && plan ? { free: t.free, fits: t.fits, total: plan.total, average: plan.average, taxes: res.data.taxes, plan } : null);
+      })
+      .catch(() => !cancelled && setQuote(null));
+    return () => { cancelled = true; };
+  }, [isOpen, roomType, checkIn, checkOut, adults, children]);
+
   if (!isOpen) return null;
 
-  const currentRoom = rooms.find(r => r._id === roomId) || selectedRoom;
   const nights = checkIn && checkOut ? Math.max(1, calculateNights(checkIn, checkOut)) : 1;
-  const totalPrice = currentRoom ? currentRoom.price * nights : 0;
+  const roomCharge = quote ? quote.total : currentRoom ? currentRoom.price * nights : 0;
+  const serviceFee = quote ? Math.round(roomCharge * quote.taxes.serviceChargeRate / 100) : 0;
+  const vatFee = quote ? Math.round((roomCharge + serviceFee) * quote.taxes.vatRate / 100) : 0;
+  const totalPrice = roomCharge + serviceFee + vatFee;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,7 +146,7 @@ const BookingModal = ({ isOpen, onClose, selectedRoom }) => {
             <div className="booking-summary-mini">
               <div className="summary-row">
                 <span>Hạng phòng:</span>
-                <strong>{successBooking.room?.name || currentRoom?.name}</strong>
+                <strong>{successBooking.room?.name || currentRoom?.name || successBooking.roomType}</strong>
               </div>
               <div className="summary-row">
                 <span>Thời gian:</span>
@@ -133,7 +154,7 @@ const BookingModal = ({ isOpen, onClose, selectedRoom }) => {
               </div>
               <div className="summary-row">
                 <span>Tổng chi phí:</span>
-                <strong className="highlight-price">{formatPrice(successBooking.totalPrice)}</strong>
+                <strong className="highlight-price">{formatPrice(successBooking.money?.grand ?? successBooking.totalPrice)}</strong>
               </div>
             </div>
 
@@ -302,13 +323,21 @@ const BookingModal = ({ isOpen, onClose, selectedRoom }) => {
               {/* Price Calculation Card */}
               <div className="pricing-summary-card full-width">
                 <div className="price-item">
-                  <span>Giá phòng mỗi đêm:</span>
-                  <strong>{formatPrice(currentRoom?.price || 0)}</strong>
+                  <span>Giá phòng trung bình mỗi đêm:</span>
+                  <strong>{formatPrice(quote ? quote.average : currentRoom?.price || 0)}</strong>
                 </div>
                 <div className="price-item">
                   <span>Số đêm lưu trú:</span>
                   <strong>{nights} đêm</strong>
                 </div>
+                {quote && (
+                  <>
+                    <div className="price-item"><span>Phí phục vụ ({quote.taxes.serviceChargeRate}%):</span><strong>{formatPrice(serviceFee)}</strong></div>
+                    <div className="price-item"><span>VAT ({quote.taxes.vatRate}%):</span><strong>{formatPrice(vatFee)}</strong></div>
+                    {quote.free < 1 && <div className="error-alert">Hạng phòng này đã hết phòng trong thời gian đã chọn.</div>}
+                    {!quote.fits && <div className="error-alert">Số khách vượt quá sức chứa của hạng phòng này.</div>}
+                  </>
+                )}
                 <div className="price-divider"></div>
                 <div className="price-total">
                   <span>Tổng tiền thanh toán:</span>
