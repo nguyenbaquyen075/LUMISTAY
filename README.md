@@ -73,3 +73,28 @@ npm install
 npm run dev
 # Frontend chạy tại: http://localhost:5173
 ```
+
+---
+
+## 🛠️ Khu Quản Trị (`/admin`)
+
+Quản trị theo mô hình PMS (property management system) của khách sạn:
+
+- **Vận hành:** tổng quan (công suất, ADR, RevPAR), đặt phòng (danh sách + lịch), sơ đồ phòng, buồng phòng, khách hàng, khai báo lưu trú.
+- **Thu chi:** ca thu ngân (mở/kết ca), chốt ngày (night audit), tài chính, báo cáo, AI.
+- **Thiết lập:** hạng phòng & gói giá (giá theo mùa, cuối tuần, chính sách hủy), cấu hình (thuế, phí, giờ, hoa hồng OTA, VietQR), nhân viên & phân quyền, nhật ký thao tác.
+
+Điểm chính: đặt theo **hạng phòng**, gán số phòng khi check-in; **gói giá** (BAR, kèm sáng, không hoàn hủy, doanh nghiệp); folio có **phí phục vụ + VAT**, đặt cọc, tách hóa đơn, VietQR; **phí hủy / no-show** theo chính sách; giảm giá giới hạn theo vai trò; trạng thái buồng phòng (sạch / bẩn / đã kiểm tra); danh sách đen và VIP; nguồn đặt + hoa hồng OTA.
+
+| Vai trò | Quyền chính |
+|---|---|
+| Super Admin (`admin`) | Toàn hệ thống, quản lý nhân viên |
+| Quản lý (`manager`) | Vận hành + báo cáo, giá phòng, tài chính, chốt ngày, cấu hình, hoàn tiền, miễn phí hủy, giảm giá ≤ 30% |
+| Lễ tân (`receptionist`) | Đặt phòng, check-in/out, thu tiền, giảm giá ≤ 10%, khách hàng, khai báo lưu trú, ca thu ngân |
+| Buồng phòng (`housekeeping`) | Cập nhật trạng thái dọn phòng |
+| Thu ngân (`cashier`) · Kế toán (`accountant`) · Sales (`sales`) | Xem trong tab Nhân viên |
+
+- Dữ liệu demo: `npm --prefix backend run seed:demo` (24 phòng, ~5 tháng đặt phòng, tài khoản mọi vai trò: `manager@lumistay.com / manager123`, `letan@lumistay.com / letan123`, `hk1@lumistay.com / hk123456`, `thungan@lumistay.com / thungan123`, `ketoan@lumistay.com / ketoan123`, `sales@lumistay.com / sales123`).
+- Database cũ tự được nâng cấp khi khởi động (tạo hạng phòng và gói giá từ dữ liệu hiện có).
+- Trợ lý AI cần `ANTHROPIC_API_KEY` trong `backend/.env`. Dự báo/bất thường/phân nhóm tự tính, không cần key.
+- Test API (dùng DB riêng): `MONGODB_URI=mongodb://127.0.0.1:27017/lumistay_test node backend/utils/demoSeed.js && MONGODB_URI=mongodb://127.0.0.1:27017/lumistay_test node --test backend/test/admin.test.js`

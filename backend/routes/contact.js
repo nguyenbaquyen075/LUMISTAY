@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
       message: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong vòng 24 giờ.'
     });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error(err); res.status(500).json({ success: false, message: 'Lỗi máy chủ.' });
   }
 });
 

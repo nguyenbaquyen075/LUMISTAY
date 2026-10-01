@@ -84,7 +84,7 @@ const BookingLookupPage = () => {
 
               <div className="result-block">
                 <h4><FiCalendar /> Lịch Trình Lưu Trú</h4>
-                <div className="info-line"><span>Phòng:</span> <strong>{booking.room?.name}</strong></div>
+                <div className="info-line"><span>Phòng:</span> <strong>{booking.room?.name || booking.roomType}</strong></div>
                 <div className="info-line"><span>Nhận phòng:</span> <span>{new Date(booking.checkIn).toLocaleDateString('vi-VN')}</span></div>
                 <div className="info-line"><span>Trả phòng:</span> <span>{new Date(booking.checkOut).toLocaleDateString('vi-VN')}</span></div>
                 <div className="info-line"><span>Số đêm:</span> <span>{booking.nights} đêm</span></div>
@@ -96,7 +96,7 @@ const BookingLookupPage = () => {
                 <div className="info-line"><span>Hình thức:</span> <span>{booking.paymentMethod}</span></div>
                 <div className="info-line price-highlight">
                   <span>Tổng thanh toán:</span>
-                  <strong>{formatPrice(booking.totalPrice)}</strong>
+                  <strong>{formatPrice(booking.money?.grand ?? booking.totalPrice)}</strong>
                 </div>
               </div>
             </div>

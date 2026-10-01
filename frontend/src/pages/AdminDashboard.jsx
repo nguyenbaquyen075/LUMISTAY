@@ -1,16 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  FiHome, FiCalendar, FiDollarSign, FiUsers, FiPlus, FiEdit2, 
-  FiTrash2, FiCheck, FiX, FiRefreshCw, FiLock, FiMail, FiLogOut 
-} from 'react-icons/fi';
+import React, { useState } from 'react';
+import { FiLock, FiMail } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
-import api from '../utils/api';
-import { formatPrice, getStatusColor, getStatusLabel, getPaymentLabel } from '../utils/helpers';
+import { useNotice, ROLES } from './admin/ui';
+import DashboardTab from './admin/DashboardTab';
+import RoomsTab from './admin/RoomsTab';
+import HousekeepingTab from './admin/HousekeepingTab';
+import BookingsTab from './admin/BookingsTab';
+import CustomersTab from './admin/CustomersTab';
+import ResidenceTab from './admin/ResidenceTab';
+import ShiftTab from './admin/ShiftTab';
+import NightAuditTab from './admin/NightAuditTab';
+import ReportsTab from './admin/ReportsTab';
+import FinanceTab from './admin/FinanceTab';
+import PricingTab from './admin/PricingTab';
+import SettingsTab from './admin/SettingsTab';
+import AuditTab from './admin/AuditTab';
+import StaffTab from './admin/StaffTab';
+import AiTab from './admin/AiTab';
 import './AdminDashboard.css';
+import './admin/admin.css';
+
+// Each tab needs ANY of its permissions (the API enforces the same rules). `group` only draws a divider.
+const TABS = [
+  { id: 'dashboard', label: 'Tổng quan', perms: ['dashboard'], group: 'Vận hành' },
+  { id: 'bookings', label: 'Đặt phòng', perms: ['bookings.view'] },
+  { id: 'rooms', label: 'Sơ đồ phòng', perms: ['rooms.view'] },
+  { id: 'housekeeping', label: 'Buồng phòng', perms: ['housekeeping.view'] },
+  { id: 'customers', label: 'Khách hàng', perms: ['customers.view'] },
+  { id: 'residence', label: 'Khai báo lưu trú', perms: ['residence'] },
+  { id: 'shift', label: 'Ca thu ngân', perms: ['shift.use'], group: 'Thu chi' },
+  { id: 'nightaudit', label: 'Chốt ngày', perms: ['audit.run', 'audit.view'] },
+  { id: 'finance', label: 'Tài chính', perms: ['finance.view'] },
+  { id: 'reports', label: 'Báo cáo', perms: ['reports.view'] },
+  { id: 'ai', label: 'AI', perms: ['ai.use'] },
+  { id: 'pricing', label: 'Giá & hạng phòng', perms: ['rates.view'], group: 'Thiết lập' },
+  { id: 'settings', label: 'Cấu hình', perms: ['settings.view'] },
+  { id: 'staff', label: 'Nhân viên', perms: ['staff.manage'] },
+  { id: 'audit', label: 'Nhật ký', perms: ['audit.view'] }
+];
 
 const AdminDashboard = () => {
-  const { user, isAdmin, login, logout, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState('bookings');
+  const { user, isAdmin, can, login, logout, loading: authLoading } = useAuth();
+  const [tab, setTab] = useState(null);
+  const [notice, notify] = useNotice();
   
   // Login form state for non-authenticated admins
   const [adminEmail, setAdminEmail] = useState('');
@@ -18,60 +50,13 @@ const AdminDashboard = () => {
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
 
-  const [stats, setStats] = useState({
-    totalBookings: 0,
-    pendingBookings: 0,
-    confirmedBookings: 0,
-    totalRevenue: 0
-  });
-  const [bookings, setBookings] = useState([]);
-  const [rooms, setRooms] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showAddRoomModal, setShowAddRoomModal] = useState(false);
-  const [newRoom, setNewRoom] = useState({
-    name: '',
-    type: 'Deluxe',
-    price: 2000000,
-    area: 45,
-    maxGuests: 2,
-    bedrooms: 1,
-    description: '',
-    images: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-    amenities: 'WiFi miễn phí, Smart TV, Minibar, Điều hòa'
-  });
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [statsRes, bookingsRes, roomsRes] = await Promise.all([
-        api.get('/bookings/admin/stats'),
-        api.get('/bookings?limit=50'),
-        api.get('/rooms')
-      ]);
-
-      if (statsRes.data?.stats) setStats(statsRes.data.stats);
-      if (bookingsRes.data?.bookings) setBookings(bookingsRes.data.bookings);
-      if (roomsRes.data?.rooms) setRooms(roomsRes.data.rooms);
-    } catch (err) {
-      console.error('Error fetching admin data:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isAdmin) {
-      fetchData();
-    }
-  }, [isAdmin]);
-
   const handleAdminLogin = async (e) => {
     e.preventDefault();
     setLoginError('');
     setLoginLoading(true);
     try {
       const data = await login(adminEmail, adminPassword);
-      if (data.user?.role !== 'admin') {
+      if (!data.user?.role || data.user.role === 'guest') {
         setLoginError('Tài khoản này không có quyền truy cập trang quản trị.');
         logout();
       }
@@ -158,341 +143,55 @@ const AdminDashboard = () => {
     );
   }
 
-  // Authenticated Admin Dashboard
-  const handleUpdateBookingStatus = async (id, status, paymentStatus) => {
-    try {
-      await api.put(`/bookings/${id}/status`, { status, paymentStatus });
-      fetchData();
-    } catch (err) {
-      alert('Cập nhật thất bại: ' + (err.response?.data?.message || err.message));
-    }
-  };
+  // Authenticated staff area
+  const tabs = TABS.filter((t) => t.perms.some(can));
+  const current = tabs.find((t) => t.id === tab) || tabs[0];
+  if (!current) return <div className="ad-page"><p style={{ padding: 40 }}>Tài khoản chưa được cấp quyền nào. Vui lòng liên hệ Super Admin.</p></div>;
 
-  const handleDeleteRoom = async (id) => {
-    if (!window.confirm('Bạn có chắc muốn xóa phòng này?')) return;
-    try {
-      await api.delete(`/rooms/${id}`);
-      fetchData();
-    } catch (err) {
-      alert('Xóa phòng thất bại: ' + err.message);
-    }
-  };
-
-  const handleCreateRoom = async (e) => {
-    e.preventDefault();
-    try {
-      const payload = {
-        ...newRoom,
-        images: [newRoom.images],
-        amenities: newRoom.amenities.split(',').map(s => s.trim())
-      };
-      await api.post('/rooms', payload);
-      setShowAddRoomModal(false);
-      setNewRoom({
-        name: '',
-        type: 'Deluxe',
-        price: 2000000,
-        area: 45,
-        maxGuests: 2,
-        bedrooms: 1,
-        description: '',
-        images: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-        amenities: 'WiFi miễn phí, Smart TV, Minibar, Điều hòa'
-      });
-      fetchData();
-    } catch (err) {
-      alert('Tạo phòng thất bại: ' + err.message);
-    }
-  };
+  const props = { notify, can, user };
+  const content = {
+    dashboard: <DashboardTab {...props} />,
+    bookings: <BookingsTab {...props} />,
+    rooms: <RoomsTab {...props} />,
+    housekeeping: <HousekeepingTab {...props} />,
+    customers: <CustomersTab {...props} />,
+    residence: <ResidenceTab {...props} />,
+    shift: <ShiftTab {...props} />,
+    nightaudit: <NightAuditTab {...props} />,
+    finance: <FinanceTab {...props} />,
+    reports: <ReportsTab {...props} />,
+    ai: <AiTab {...props} />,
+    pricing: <PricingTab {...props} />,
+    settings: <SettingsTab {...props} />,
+    staff: <StaffTab me={user} {...props} />,
+    audit: <AuditTab {...props} />
+  }[current.id];
 
   return (
-    <div className="admin-page">
-      <div className="container admin-container">
-        {/* Header */}
-        <div className="admin-top-bar">
-          <div>
-            <span className="section-label">HỆ THỐNG QUẢN TRỊ NỘI BỘ</span>
-            <h1 className="admin-main-title">Quản Lý LumiStay Resort</h1>
-            <small style={{ color: '#64748b' }}>Đang đăng nhập với: <strong>{user?.name}</strong> ({user?.email})</small>
-          </div>
-          <div className="admin-top-actions">
-            <button className="btn btn-secondary btn-sm" onClick={fetchData}>
-              <FiRefreshCw /> Làm mới
-            </button>
-            <button className="btn btn-outline-white btn-sm btn-admin-logout" onClick={logout}>
-              <FiLogOut /> Đăng xuất
-            </button>
-          </div>
+    <div className="ad-page">
+      <header className="ad-top">
+        <div className="ad-brand"><strong>LumiStay</strong><small>Hệ thống quản trị khách sạn</small></div>
+        <div className="ad-user">
+          <div><strong>{user.name}</strong><small>{ROLES[user.role]}</small></div>
+          <button className="ad-btn sm btn-admin-logout" onClick={logout}>Đăng xuất</button>
         </div>
-
-        {/* Stats Row */}
-        <div className="admin-stats-grid">
-          <div className="admin-stat-card">
-            <div className="stat-icon-circle blue"><FiCalendar /></div>
-            <div>
-              <span className="stat-lbl">Tổng đơn đặt phòng</span>
-              <h3 className="stat-val">{stats.totalBookings}</h3>
-            </div>
-          </div>
-
-          <div className="admin-stat-card">
-            <div className="stat-icon-circle yellow"><FiUsers /></div>
-            <div>
-              <span className="stat-lbl">Đơn chờ xác nhận</span>
-              <h3 className="stat-val">{stats.pendingBookings}</h3>
-            </div>
-          </div>
-
-          <div className="admin-stat-card">
-            <div className="stat-icon-circle green"><FiCheck /></div>
-            <div>
-              <span className="stat-lbl">Đơn đã xác nhận</span>
-              <h3 className="stat-val">{stats.confirmedBookings}</h3>
-            </div>
-          </div>
-
-          <div className="admin-stat-card">
-            <div className="stat-icon-circle gold"><FiDollarSign /></div>
-            <div>
-              <span className="stat-lbl">Tổng doanh thu</span>
-              <h3 className="stat-val">{formatPrice(stats.totalRevenue)}</h3>
-            </div>
-          </div>
-        </div>
-
-        {/* Tabs Bar */}
-        <div className="admin-nav-tabs">
-          <button 
-            className={`admin-tab-btn ${activeTab === 'bookings' ? 'active' : ''}`}
-            onClick={() => setActiveTab('bookings')}
-          >
-            Quản Lý Đặt Phòng ({bookings.length})
-          </button>
-          <button 
-            className={`admin-tab-btn ${activeTab === 'rooms' ? 'active' : ''}`}
-            onClick={() => setActiveTab('rooms')}
-          >
-            Quản Lý Phòng ({rooms.length})
-          </button>
-        </div>
-
-        {/* TAB 1: Bookings Management */}
-        {activeTab === 'bookings' && (
-          <div className="admin-table-card">
-            <div className="table-responsive">
-              <table className="admin-data-table">
-                <thead>
-                  <tr>
-                    <th>Mã Đặt</th>
-                    <th>Khách Hàng</th>
-                    <th>Phòng</th>
-                    <th>Thời Gian</th>
-                    <th>Tổng Tiền</th>
-                    <th>Trạng Thái</th>
-                    <th>Thanh Toán</th>
-                    <th>Thao Tác</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {bookings.map(b => (
-                    <tr key={b._id}>
-                      <td><strong className="code-pill">{b.bookingCode}</strong></td>
-                      <td>
-                        <div className="guest-col">
-                          <strong>{b.guestInfo?.name}</strong>
-                          <small>{b.guestInfo?.phone}</small>
-                        </div>
-                      </td>
-                      <td>{b.room?.name || 'Phòng'}</td>
-                      <td>
-                        <small>
-                          {new Date(b.checkIn).toLocaleDateString('vi-VN')} - {new Date(b.checkOut).toLocaleDateString('vi-VN')} ({b.nights} đêm)
-                        </small>
-                      </td>
-                      <td><strong>{formatPrice(b.totalPrice)}</strong></td>
-                      <td>
-                        <span className={`badge ${getStatusColor(b.status)}`}>
-                          {getStatusLabel(b.status)}
-                        </span>
-                      </td>
-                      <td>
-                        <span className="badge badge-navy">
-                          {getPaymentLabel(b.paymentStatus)}
-                        </span>
-                      </td>
-                      <td>
-                        <div className="action-buttons-group">
-                          {b.status === 'pending' && (
-                            <button 
-                              className="btn-action-sm confirm"
-                              title="Xác nhận"
-                              onClick={() => handleUpdateBookingStatus(b._id, 'confirmed', 'paid')}
-                            >
-                              <FiCheck /> Duyệt
-                            </button>
-                          )}
-                          {b.status !== 'cancelled' && (
-                            <button 
-                              className="btn-action-sm cancel"
-                              title="Hủy"
-                              onClick={() => handleUpdateBookingStatus(b._id, 'cancelled', b.paymentStatus)}
-                            >
-                              <FiX /> Hủy
-                            </button>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* TAB 2: Rooms Management */}
-        {activeTab === 'rooms' && (
-          <div className="admin-rooms-section">
-            <div className="rooms-top-action">
-              <h3>Danh Sách Các Hạng Phòng</h3>
-              <button className="btn btn-primary btn-sm" onClick={() => setShowAddRoomModal(true)}>
-                <FiPlus /> Thêm Phòng Mới
-              </button>
-            </div>
-
-            <div className="admin-rooms-grid">
-              {rooms.map(room => (
-                <div key={room._id} className="admin-room-card">
-                  <img src={room.images?.[0]} alt={room.name} className="admin-room-img" />
-                  <div className="admin-room-details">
-                    <div className="admin-room-type">{room.type}</div>
-                    <h4 className="admin-room-title">{room.name}</h4>
-                    <p className="admin-room-specs">{room.area}m² • Tối đa {room.maxGuests} khách • {room.bedrooms} phòng ngủ</p>
-                    <div className="admin-room-price">{formatPrice(room.price)} / đêm</div>
-
-                    <div className="admin-room-actions">
-                      <button 
-                        className="btn-delete-room"
-                        onClick={() => handleDeleteRoom(room._id)}
-                      >
-                        <FiTrash2 /> Xóa phòng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Add Room Modal */}
-        {showAddRoomModal && (
-          <div className="booking-modal-backdrop" onClick={() => setShowAddRoomModal(false)}>
-            <div className="booking-modal-box" onClick={e => e.stopPropagation()}>
-              <button className="modal-close-btn" onClick={() => setShowAddRoomModal(false)}>✕</button>
-              <h2 className="modal-title" style={{ marginBottom: '20px' }}>Thêm Phòng Mới</h2>
-
-              <form onSubmit={handleCreateRoom} className="booking-grid-form">
-                <div className="form-group full-width">
-                  <label className="form-label">Tên Phòng</label>
-                  <input 
-                    type="text" 
-                    className="form-input" 
-                    placeholder="VD: Grand Ocean Suite" 
-                    value={newRoom.name}
-                    onChange={e => setNewRoom({...newRoom, name: e.target.value})}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Loại Phòng</label>
-                  <select 
-                    className="form-input" 
-                    value={newRoom.type}
-                    onChange={e => setNewRoom({...newRoom, type: e.target.value})}
-                  >
-                    <option value="Deluxe">Deluxe</option>
-                    <option value="Premier Suite">Premier Suite</option>
-                    <option value="Family Room">Family Room</option>
-                    <option value="Villa">Villa</option>
-                    <option value="Standard">Standard</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Giá (VNĐ / đêm)</label>
-                  <input 
-                    type="number" 
-                    className="form-input" 
-                    value={newRoom.price}
-                    onChange={e => setNewRoom({...newRoom, price: Number(e.target.value)})}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Diện tích (m²)</label>
-                  <input 
-                    type="number" 
-                    className="form-input" 
-                    value={newRoom.area}
-                    onChange={e => setNewRoom({...newRoom, area: Number(e.target.value)})}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Số khách tối đa</label>
-                  <input 
-                    type="number" 
-                    className="form-input" 
-                    value={newRoom.maxGuests}
-                    onChange={e => setNewRoom({...newRoom, maxGuests: Number(e.target.value)})}
-                    required
-                  />
-                </div>
-
-                <div className="form-group full-width">
-                  <label className="form-label">URL Hình Ảnh</label>
-                  <input 
-                    type="text" 
-                    className="form-input" 
-                    value={newRoom.images}
-                    onChange={e => setNewRoom({...newRoom, images: e.target.value})}
-                    required
-                  />
-                </div>
-
-                <div className="form-group full-width">
-                  <label className="form-label">Tiện Nghi (cách nhau bởi dấu phẩy)</label>
-                  <input 
-                    type="text" 
-                    className="form-input" 
-                    value={newRoom.amenities}
-                    onChange={e => setNewRoom({...newRoom, amenities: e.target.value})}
-                  />
-                </div>
-
-                <div className="form-group full-width">
-                  <label className="form-label">Mô Tả Phòng</label>
-                  <textarea 
-                    className="form-input" 
-                    rows="3"
-                    value={newRoom.description}
-                    onChange={e => setNewRoom({...newRoom, description: e.target.value})}
-                    required
-                  ></textarea>
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-lg full-width">
-                  Tạo Phòng
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
+      </header>
+      <div className="ad-body">
+        <nav className="ad-nav">
+          {tabs.map((t) => (
+            <React.Fragment key={t.id}>
+              {t.group && <div className="ad-nav-group">{t.group}</div>}
+              <button className={`ad-nav-btn ${t.id === current.id ? 'active' : ''}`} onClick={() => setTab(t.id)}>{t.label}</button>
+            </React.Fragment>
+          ))}
+        </nav>
+        <main className="ad-main">
+          <div className="ad-title"><h1>{current.label}</h1></div>
+          {/* key remounts the tab so every visit refetches fresh data */}
+          <React.Fragment key={current.id}>{content}</React.Fragment>
+        </main>
       </div>
+      {notice}
     </div>
   );
 };

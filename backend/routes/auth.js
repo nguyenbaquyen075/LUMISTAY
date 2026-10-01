@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
+const { permissionsOf } = require('../middleware/permissions');
 
 const signToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE || '7d' });
 
@@ -34,28 +35,29 @@ router.post('/login', async (req, res) => {
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ success: false, message: 'Email hoặc mật khẩu không đúng.' });
     }
+    if (!user.isActive) return res.status(403).json({ success: false, message: 'Tài khoản đã bị vô hiệu hóa.' });
     const token = signToken(user._id);
     res.json({
       success: true,
       message: 'Đăng nhập thành công!',
       token,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role, phone: user.phone, avatar: user.avatar }
+      user: { id: user._id, name: user.name, email: user.email, role: user.role, phone: user.phone, avatar: user.avatar, permissions: permissionsOf(user.role) }
     });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error(err); res.status(500).json({ success: false, message: 'Lỗi máy chủ.' });
   }
 });
 
 // @GET /api/auth/me
 router.get('/me', protect, async (req, res) => {
-  res.json({ success: true, user: req.user });
+  res.json({ success: true, user: { ...req.user.toObject(), permissions: permissionsOf(req.user.role) } });
 });
 
 // @PUT /api/auth/profile
 router.put('/profile', protect, async (req, res) => {
   try {
     const { name, phone, avatar } = req.body;
-    const user = await User.findByIdAndUpdate(req.user._id, { name, phone, avatar }, { new: true, runValidators: true });
+    const user = await User.findByIdAndUpdate(req.user._id, { name, phone, avatar }, { returnDocument: 'after', runValidators: true });
     res.json({ success: true, message: 'Cập nhật thành công!', user });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Service = require('../models/Service');
-const { protect, authorize } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
+const { need } = require('../middleware/permissions');
 
 router.get('/', async (req, res) => {
   try {
@@ -12,11 +13,11 @@ router.get('/', async (req, res) => {
     const services = await Service.find(filter).sort({ order: 1, createdAt: -1 });
     res.json({ success: true, count: services.length, services });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error(err); res.status(500).json({ success: false, message: 'Lỗi máy chủ.' });
   }
 });
 
-router.post('/', protect, authorize('admin'), async (req, res) => {
+router.post('/', protect, need('rooms.edit'), async (req, res) => {
   try {
     const service = await Service.create(req.body);
     res.status(201).json({ success: true, service });
@@ -25,21 +26,21 @@ router.post('/', protect, authorize('admin'), async (req, res) => {
   }
 });
 
-router.put('/:id', protect, authorize('admin'), async (req, res) => {
+router.put('/:id', protect, need('rooms.edit'), async (req, res) => {
   try {
-    const service = await Service.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const service = await Service.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' });
     res.json({ success: true, service });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
 
-router.delete('/:id', protect, authorize('admin'), async (req, res) => {
+router.delete('/:id', protect, need('rooms.edit'), async (req, res) => {
   try {
     await Service.findByIdAndDelete(req.params.id);
     res.json({ success: true, message: 'Xóa dịch vụ thành công!' });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error(err); res.status(500).json({ success: false, message: 'Lỗi máy chủ.' });
   }
 });
 

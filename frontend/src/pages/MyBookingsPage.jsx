@@ -67,7 +67,7 @@ const MyBookingsPage = () => {
                 <div className="result-grid">
                   <div className="result-block">
                     <h4>Hạng phòng</h4>
-                    <div className="info-line"><strong>{b.room?.name || 'Phòng'}</strong></div>
+                    <div className="info-line"><strong>{b.room?.name || b.roomType || 'Phòng'}</strong></div>
                     <div className="info-line"><span>{b.nights} đêm lưu trú</span></div>
                   </div>
                   <div className="result-block">
@@ -79,7 +79,7 @@ const MyBookingsPage = () => {
                     <h4>Chi phí</h4>
                     <div className="info-line price-highlight">
                       <span>Tổng tiền:</span>
-                      <strong>{formatPrice(b.totalPrice)}</strong>
+                      <strong>{formatPrice(b.money?.grand ?? b.totalPrice)}</strong>
                     </div>
                   </div>
                 </div>
