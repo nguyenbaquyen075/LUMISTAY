@@ -3,16 +3,16 @@
 <rect width="1100" height="520" rx="16" fill="url(#bg)"/>
 <text x="550.0" y="38" text-anchor="middle" fill="#F1F5F9" font-size="20" font-weight="700">Khách đặt phòng và tra cứu đơn</text>
 <path d="M242.9 110.0 L338.4 110.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
-<path d="M481.6 110.0 L597.4 110.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
-<path d="M782.6 110.0 L885.0 110.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
+<path d="M481.6 110.0 L605.8 110.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
+<path d="M774.2 110.0 L878.4 110.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <path d="M950.0 139.0 L950.0 231.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <path d="M874.2 260.0 L786.2 260.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <path d="M593.8 260.0 L486.4 260.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <path d="M333.6 260.0 L219.8 260.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <path d="M150.0 289.0 L150.0 381.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <path d="M234.2 410.0 L336.9 410.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
-<path d="M483.1 410.0 L572.2 410.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
-<path d="M807.8 410.0 L836.4 410.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
+<path d="M483.1 410.0 L576.4 410.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
+<path d="M803.6 410.0 L836.4 410.0" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1s" repeatCount="indefinite"/></path>
 <g>
 <rect x="54.1" y="78.0" width="191.8" height="64" rx="14" fill="#38BDF8" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0001;0.0923;1" values="0;1;0;0"/></rect>
 <rect x="57.1" y="81.0" width="185.8" height="58" rx="11" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
@@ -26,14 +26,14 @@
 <text x="410.0" y="124.0" text-anchor="middle" fill="#94A3B8" font-size="12">modal đặt phòng</text>
 </g>
 <g>
-<rect x="594.4" y="85.0" width="191.2" height="50" rx="14" fill="#34D399" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.1538;0.1543;0.2462;1" values="0;0;1;0;0"/></rect>
-<rect x="597.4" y="88.0" width="185.2" height="44" rx="11" fill="#1E293B" stroke="#34D399" stroke-width="2"/>
-<text x="690.0" y="115.0" text-anchor="middle" fill="#F8FAFC" font-size="14" font-weight="600">POST /api/bookings</text>
+<rect x="602.8" y="85.0" width="174.4" height="50" rx="14" fill="#34D399" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.1538;0.1543;0.2462;1" values="0;0;1;0;0"/></rect>
+<rect x="605.8" y="88.0" width="168.4" height="44" rx="11" fill="#1E293B" stroke="#34D399" stroke-width="2"/>
+<text x="690.0" y="115.0" text-anchor="middle" fill="#F8FAFC" font-size="14" font-weight="600">Máy chủ nhận đơn</text>
 </g>
 <g>
-<rect x="882.0" y="78.0" width="136.0" height="64" rx="14" fill="#4ADE80" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.2308;0.2313;0.3231;1" values="0;0;1;0;0"/></rect>
-<rect x="885.0" y="81.0" width="130.0" height="58" rx="11" fill="#1E293B" stroke="#4ADE80" stroke-width="2"/>
-<text x="950.0" y="105.0" text-anchor="middle" fill="#F8FAFC" font-size="14" font-weight="600">MongoDB</text>
+<rect x="875.4" y="78.0" width="149.2" height="64" rx="14" fill="#4ADE80" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.2308;0.2313;0.3231;1" values="0;0;1;0;0"/></rect>
+<rect x="878.4" y="81.0" width="143.2" height="58" rx="11" fill="#1E293B" stroke="#4ADE80" stroke-width="2"/>
+<text x="950.0" y="105.0" text-anchor="middle" fill="#F8FAFC" font-size="14" font-weight="600">Cơ sở dữ liệu</text>
 <text x="950.0" y="124.0" text-anchor="middle" fill="#94A3B8" font-size="12">tìm phòng</text>
 </g>
 <g>
@@ -73,9 +73,9 @@
 <text x="410.0" y="424.0" text-anchor="middle" fill="#94A3B8" font-size="12">nhập mã đặt phòng</text>
 </g>
 <g>
-<rect x="569.2" y="385.0" width="241.6" height="50" rx="14" fill="#34D399" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.7692;0.7697;0.8615;1" values="0;0;1;0;0"/></rect>
-<rect x="572.2" y="388.0" width="235.6" height="44" rx="11" fill="#1E293B" stroke="#34D399" stroke-width="2"/>
-<text x="690.0" y="415.0" text-anchor="middle" fill="#F8FAFC" font-size="14" font-weight="600">GET /bookings/code/:code</text>
+<rect x="573.4" y="385.0" width="233.2" height="50" rx="14" fill="#34D399" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.7692;0.7697;0.8615;1" values="0;0;1;0;0"/></rect>
+<rect x="576.4" y="388.0" width="227.2" height="44" rx="11" fill="#1E293B" stroke="#34D399" stroke-width="2"/>
+<text x="690.0" y="415.0" text-anchor="middle" fill="#F8FAFC" font-size="14" font-weight="600">Máy chủ tìm đơn theo mã</text>
 </g>
 <g>
 <rect x="833.4" y="385.0" width="233.2" height="50" rx="14" fill="#4ADE80" opacity="0" filter="url(#g)"><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.8462;0.8467;0.9385;1" values="0;0;1;0;0"/></rect>
@@ -84,10 +84,10 @@
 </g>
 <circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0001;0.0769;1" path="M242.9 110.0 L338.4 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0001;0.0769;1" values="0;1;0;0"/></circle>
 <circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0001;0.0769;1" path="M242.9 110.0 L338.4 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0001;0.0769;1" values="0;1;0;0"/></circle>
-<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0769;0.1538;1" path="M481.6 110.0 L597.4 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0769;0.0774;0.1538;1" values="0;0;1;0;0"/></circle>
-<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0769;0.1538;1" path="M481.6 110.0 L597.4 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0769;0.0774;0.1538;1" values="0;0;1;0;0"/></circle>
-<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.1538;0.2308;1" path="M782.6 110.0 L885.0 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.1538;0.1543;0.2308;1" values="0;0;1;0;0"/></circle>
-<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.1538;0.2308;1" path="M782.6 110.0 L885.0 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.1538;0.1543;0.2308;1" values="0;0;1;0;0"/></circle>
+<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0769;0.1538;1" path="M481.6 110.0 L605.8 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0769;0.0774;0.1538;1" values="0;0;1;0;0"/></circle>
+<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0769;0.1538;1" path="M481.6 110.0 L605.8 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.0769;0.0774;0.1538;1" values="0;0;1;0;0"/></circle>
+<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.1538;0.2308;1" path="M774.2 110.0 L878.4 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.1538;0.1543;0.2308;1" values="0;0;1;0;0"/></circle>
+<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.1538;0.2308;1" path="M774.2 110.0 L878.4 110.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.1538;0.1543;0.2308;1" values="0;0;1;0;0"/></circle>
 <circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.2308;0.3077;1" path="M950.0 139.0 L950.0 231.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.2308;0.2313;0.3077;1" values="0;0;1;0;0"/></circle>
 <circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.2308;0.3077;1" path="M950.0 139.0 L950.0 231.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.2308;0.2313;0.3077;1" values="0;0;1;0;0"/></circle>
 <circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.3077;0.3846;1" path="M874.2 260.0 L786.2 260.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.3077;0.3082;0.3846;1" values="0;0;1;0;0"/></circle>
@@ -100,8 +100,8 @@
 <circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.5385;0.6154;1" path="M150.0 289.0 L150.0 381.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.5385;0.5390;0.6154;1" values="0;0;1;0;0"/></circle>
 <circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6154;0.6923;1" path="M234.2 410.0 L336.9 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.6154;0.6159;0.6923;1" values="0;0;1;0;0"/></circle>
 <circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6154;0.6923;1" path="M234.2 410.0 L336.9 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.6154;0.6159;0.6923;1" values="0;0;1;0;0"/></circle>
-<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6923;0.7692;1" path="M483.1 410.0 L572.2 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.6923;0.6928;0.7692;1" values="0;0;1;0;0"/></circle>
-<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6923;0.7692;1" path="M483.1 410.0 L572.2 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.6923;0.6928;0.7692;1" values="0;0;1;0;0"/></circle>
-<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.7692;0.8462;1" path="M807.8 410.0 L836.4 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.7692;0.7697;0.8462;1" values="0;0;1;0;0"/></circle>
-<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.7692;0.8462;1" path="M807.8 410.0 L836.4 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.7692;0.7697;0.8462;1" values="0;0;1;0;0"/></circle>
+<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6923;0.7692;1" path="M483.1 410.0 L576.4 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.6923;0.6928;0.7692;1" values="0;0;1;0;0"/></circle>
+<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6923;0.7692;1" path="M483.1 410.0 L576.4 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.6923;0.6928;0.7692;1" values="0;0;1;0;0"/></circle>
+<circle r="6" fill="#FDE68A" filter="url(#g)" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.7692;0.8462;1" path="M803.6 410.0 L836.4 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.7692;0.7697;0.8462;1" values="0;0;1;0;0"/></circle>
+<circle r="3.5" fill="#FFFBEB" opacity="0"><animateMotion dur="19.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.7692;0.8462;1" path="M803.6 410.0 L836.4 410.0"/><animate attributeName="opacity" dur="19.5s" repeatCount="indefinite" keyTimes="0;0.7692;0.7697;0.8462;1" values="0;0;1;0;0"/></circle>
 </svg>
