@@ -26,7 +26,6 @@ Tìm phòng · Đặt phòng tính tiền tự động · Tra cứu bằng mã �
 6. [Mô hình dữ liệu](#6-mô-hình-dữ-liệu)
 7. [Bản đồ đường dẫn và API](#7-bản-đồ-đường-dẫn-và-api)
 8. [Hạn chế và hướng phát triển](#8-hạn-chế-và-hướng-phát-triển)
-9. [Chi tiết cài đặt và chạy](#9-chi-tiết-cài-đặt-và-chạy)
 
 ---
 
@@ -69,16 +68,9 @@ Phân quyền ở backend bằng middleware `protect` (đã đăng nhập) và `
 
 ## 4. Kiến trúc hệ thống
 
-```mermaid
-flowchart LR
-    U[Trình duyệt<br/>React 19 + Vite] -- Axios /api --> API[Express 5<br/>routes + middleware JWT]
-    API --> M[(MongoDB<br/>Mongoose)]
-    API -.-> BOT[Chatbot<br/>khớp từ khoá]
-    subgraph Routes
-      R1[auth] --- R2[rooms] --- R3[bookings] --- R4[reviews] --- R5[services] --- R6[contact] --- R7[chatbot]
-    end
-    API --- Routes
-```
+> Các sơ đồ bên dưới là ảnh SVG động: chấm sáng chạy dọc mũi tên theo từng bước, node được tô sáng khi dữ liệu tới.
+
+<p align="center"><img src="docs/images/kien-truc.svg" alt="Kiến trúc hệ thống LumiStay" width="100%"></p>
 
 Luồng thường gặp: **Trang React → `utils/api.js` (Axios) → route Express → model Mongoose → JSON trả về**. Token JWT lưu ở phía trình duyệt và gửi kèm các API cần đăng nhập.
 
@@ -86,61 +78,21 @@ Luồng thường gặp: **Trang React → `utils/api.js` (Axios) → route Expr
 
 ### 5.1. Khách đặt phòng và tra cứu đơn
 
-```mermaid
-sequenceDiagram
-    actor K as Khách
-    participant W as Website (React)
-    participant A as API /api/bookings
-    participant D as MongoDB
-    K->>W: Chọn phòng, ngày nhận/trả, số khách
-    W->>A: POST /api/bookings
-    A->>D: Tìm phòng, kiểm tra còn nhận khách
-    A->>A: Số đêm = ngày trả − ngày nhận (phải ≥ 1)
-    A->>A: Tổng tiền = số đêm × giá phòng
-    A->>D: Lưu đơn (trạng thái pending, chưa thanh toán)
-    A-->>W: Mã đặt phòng + chi tiết đơn
-    K->>W: Nhập mã ở trang Tra cứu
-    W->>A: GET /api/bookings/code/:code
-    A-->>W: Trạng thái đơn
-```
+<p align="center"><img src="docs/images/luong-dat-phong.svg" alt="Khách đặt phòng và tra cứu đơn" width="100%"></p>
 
 ### 5.2. Vòng đời một đơn đặt phòng
 
-```mermaid
-stateDiagram-v2
-    [*] --> pending: Khách đặt phòng
-    pending --> confirmed: Admin duyệt
-    confirmed --> checked_in: Lễ tân cập nhật nhận phòng
-    checked_in --> checked_out: Trả phòng
-    pending --> cancelled: Khách hoặc admin huỷ
-    confirmed --> cancelled: Khách hoặc admin huỷ
-    checked_out --> [*]
-    cancelled --> [*]
-```
+<p align="center"><img src="docs/images/luong-trang-thai-don.svg" alt="Vòng đời một đơn đặt phòng" width="100%"></p>
 
 Thanh toán theo dõi riêng: `unpaid → paid → refunded`; phương thức gồm `cash`, `card`, `transfer`, `online`.
 
 ### 5.3. Hỏi trợ lý Lumi
 
-```mermaid
-flowchart LR
-    Q[Khách gõ câu hỏi] --> P[POST /api/chatbot]
-    P --> N[Chuẩn hoá chữ thường]
-    N --> M{Khớp nhóm từ khoá?<br/>phòng · giờ nhận · dịch vụ<br/>vị trí · huỷ · wifi · bữa sáng}
-    M -- có --> A[Trả lời mẫu của nhóm đó]
-    M -- không --> G[Gợi ý các chủ đề có thể hỏi]
-```
+<p align="center"><img src="docs/images/luong-chatbot.svg" alt="Hỏi trợ lý Lumi" width="100%"></p>
 
 ### 5.4. Quản trị viên xử lý đơn
 
-```mermaid
-flowchart LR
-    L[Đăng nhập admin] --> S[Xem thống kê<br/>GET /bookings/admin/stats]
-    S --> Q[Danh sách đơn]
-    Q --> C[Cập nhật trạng thái<br/>PUT /bookings/:id/status]
-    Q --> X[Xác nhận thanh toán]
-    S --> RM[Quản lý hạng phòng<br/>thêm · sửa · xoá]
-```
+<p align="center"><img src="docs/images/luong-quan-tri.svg" alt="Quản trị viên xử lý đơn" width="100%"></p>
 
 ## 6. Mô hình dữ liệu
 
@@ -183,32 +135,3 @@ erDiagram
 - Đặt phòng **chưa kiểm tra trùng lịch** giữa các đơn cùng phòng, cùng ngày.
 - Thanh toán chỉ ghi nhận phương thức, **chưa có cổng thanh toán** hay xác nhận tự động.
 - Chưa có kiểm thử tự động.
-
----
-
-## 9. Chi tiết cài đặt và chạy
-
-## 🔑 Tài Khoản Admin Mặc Định
-
-- **Email**: `admin@lumistay.com`
-- **Mật khẩu**: `admin123456`
-
----
-
-## 💻 Hướng Dẫn Chạy Dự Án
-
-### 1. Khởi động Backend
-```bash
-cd backend
-npm install
-npm start
-# Backend chạy tại: http://localhost:5001
-```
-
-### 2. Khởi động Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-# Frontend chạy tại: http://localhost:5173
-```
